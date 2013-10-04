@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -25,7 +27,13 @@ public class BillFragment extends Fragment implements OnClickListener {
 	private Button m15Percent;
 	private Button m20Percent;
 	private TextView mTipAmount;
-		
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_bill, container, false);
@@ -55,6 +63,12 @@ public class BillFragment extends Fragment implements OnClickListener {
 		outState.putString(KEY_TIP, mTipAmount.getText().toString());
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.bill, menu);
+	}	
+	
 	public void showTip(double percent) {
 		double amount = Double.parseDouble(mBillAmount.getText().toString());
 		mBill.setAmount(amount);
