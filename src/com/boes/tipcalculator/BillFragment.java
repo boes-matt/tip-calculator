@@ -70,7 +70,13 @@ public class BillFragment extends Fragment implements OnClickListener {
 	}	
 	
 	public void showTip(double percent) {
-		double amount = Double.parseDouble(mBillAmount.getText().toString());
+		double amount;
+		try {
+			amount = Double.parseDouble(mBillAmount.getText().toString());
+		} catch (NumberFormatException e) {
+			amount = 0;
+		}
+		
 		mBill.setAmount(amount);
 		double tip = mBill.calculateTip(percent);
 		
